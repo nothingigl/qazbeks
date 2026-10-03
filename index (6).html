@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COFFEE SHOP</title>
+
+    <!-- Подключаем шрифты с Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Подключаем наш файл со стилями -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ==================== ШАПКА САЙТА (HEADER) ==================== -->
+    <header class="header">
+      <div class="container header__inner">
+        <a href="#" class="logo">
+          <span class="logo__icon">☕</span>
+          Зерно
+        </a>
+
+        <!-- Меню навигации -->
+        <nav class="nav" id="nav">
+          <a href="#about">О нас</a>
+          <a href="#menu">Меню</a>
+          <a href="#hours">Часы работы</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+
+        <button type="button" class="btn btn--small" id="open-booking">
+          Забронировать стол
+        </button>
+
+        <!-- Кнопка-бургер, видна только на маленьких экранах (см. CSS) -->
+        <button
+          type="button"
+          class="burger"
+          id="burger"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== ГЕРОЙ-БЛОК (ПЕРВЫЙ ЭКРАН) ==================== -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow">Обжарка каждую пятницу</p>
+          <h1>Кофе,<br />который<br />будит город</h1>
+          <p class="hero__lead">
+            Мы обжариваем зёрна маленькими партиями и варим кофе так, как варили
+            бы для себя. Заходите на чашку — оставайтесь на разговор.
+          </p>
+          <div class="hero__actions">
+            <a href="#menu" class="btn">Смотреть меню</a>
+            <a href="#about" class="btn btn--ghost">Узнать больше</a>
+          </div>
+        </div>
+
+        <!-- Простая декоративная "чашка" на CSS, без картинок -->
+        <div class="hero__cup" aria-hidden="true">
+          <div class="steam steam--1"></div>
+          <div class="steam steam--2"></div>
+          <div class="steam steam--3"></div>
+          <div class="cup">
+            <div class="cup__handle"></div>
+          </div>
+          <div class="saucer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== О НАС ==================== -->
+    <section id="about" class="section about">
+      <div class="container about__inner">
+        <div class="about__card">
+          <span class="number">01</span>
+          <h3>Своя обжарка</h3>
+          <p>
+            Закупаем зелёные зёрна напрямую у фермеров и обжариваем сами,
+            небольшими партиями.
+          </p>
+        </div>
+        <div class="about__card">
+          <span class="number">02</span>
+          <h3>Бариста-энтузиасты</h3>
+          <p>
+            Каждый бариста прошёл обучение и с радостью расскажет о вкусе
+            конкретного зерна.
+          </p>
+        </div>
+        <div class="about__card">
+          <span class="number">03</span>
+          <h3>Уютное место</h3>
+          <p>
+            Тёплый свет, деревянные столы и книги на полках — здесь хочется
+            задержаться.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== МЕНЮ ==================== -->
+    <section id="menu" class="section menu">
+      <div class="container">
+        <p class="eyebrow eyebrow--center">Меню</p>
+        <h2 class="section__title">Что у нас есть</h2>
+
+        <div class="menu__grid">
+          <article class="menu__item">
+            <div class="menu__row">
+              <h4>Эспрессо</h4>
+              <span class="price">180 ₽</span>
+            </div>
+            <p>Насыщенный и короткий, для тех, кто ценит чистый вкус кофе.</p>
+          </article>
+
+          <article class="menu__item">
+            <div class="menu__row">
+              <h4>Капучино</h4>
+              <span class="price">240 ₽</span>
+            </div>
+            <p>
+              Эспрессо с бархатной молочной пенкой — наш самый популярный
+              напиток.
+            </p>
+          </article>
+
+          <article class="menu__item">
+            <div class="menu__row">
+              <h4>Латте</h4>
+              <span class="price">260 ₽</span>
+            </div>
+            <p>
+              Мягкий и молочный, можно с сиропом на выбор: ваниль, карамель,
+              орех.
+            </p>
+          </article>
+
+          <article class="menu__item">
+            <div class="menu__row">
+              <h4>Раф на топлёном молоке</h4>
+              <span class="price">280 ₽</span>
+            </div>
+            <p>Нежная кофейная классика с лёгким карамельным оттенком.</p>
+          </article>
+
+          <article class="menu__item">
+            <div class="menu__row">
+              <h4>Фильтр-кофе</h4>
+              <span class="price">220 ₽</span>
+            </div>
+            <p>
+              Кофе недели, приготовленный через воронку — раскрывает вкус зерна
+              полностью.
+            </p>
+          </article>
+
+          <article class="menu__item">
+            <div class="menu__row">
+              <h4>Домашний круассан</h4>
+              <span class="price">150 ₽</span>
+            </div>
+            <p>Печём каждое утро — хрустящий снаружи, воздушный внутри.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ЧАСЫ РАБОТЫ / КОНТАКТЫ ==================== -->
+    <section id="hours" class="section hours">
+      <div class="container hours__inner">
+        <div>
+          <p class="eyebrow">Часы работы</p>
+          <ul class="hours__list">
+            <li><span>Пн – Пт</span><span>8:00 – 21:00</span></li>
+            <li><span>Сб – Вс</span><span>9:00 – 22:00</span></li>
+          </ul>
+        </div>
+
+        <div id="contacts">
+          <p class="eyebrow">Контакты</p>
+          <p class="contacts__line">г. Актобе, ул. Кофейная, 12</p>
+          <p class="contacts__line">+7 (700) 123-45-67</p>
+          <p class="contacts__line">hello@zernocoffee.example</p>
+          <a href="#" class="btn">Проложить маршрут</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== МОДАЛЬНОЕ ОКНО БРОНИРОВАНИЯ ==================== -->
+    <!-- По умолчанию скрыто (см. CSS), открывается через JS -->
+    <div class="modal" id="booking-modal">
+      <div class="modal__backdrop" id="modal-backdrop"></div>
+
+      <div
+        class="modal__box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <button
+          type="button"
+          class="modal__close"
+          id="modal-close"
+          aria-label="Закрыть"
+        >
+          ✕
+        </button>
+
+        <h3 id="modal-title">Бронирование стола</h3>
+
+        <!-- Форма без действия на сервер: JS сам проверит и покажет результат -->
+        <form id="booking-form" novalidate>
+          <label class="field">
+            Имя
+            <input
+              type="text"
+              name="name"
+              id="field-name"
+              required
+              minlength="2"
+              placeholder="Как к вам обращаться?"
+            />
+            <span class="field__error" id="error-name"></span>
+          </label>
+
+          <label class="field">
+            Телефон
+            <input
+              type="tel"
+              name="phone"
+              id="field-phone"
+              required
+              placeholder="+7 (___) ___-__-__"
+            />
+            <span class="field__error" id="error-phone"></span>
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              Дата
+              <input type="date" name="date" id="field-date" required />
+            </label>
+
+            <label class="field">
+              Гостей
+              <select name="guests" id="field-guests">
+                <option value="1">1 человек</option>
+                <option value="2" selected>2 человека</option>
+                <option value="3">3 человека</option>
+                <option value="4">4+ человека</option>
+              </select>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="btn"
+            style="width: 100%; text-align: center"
+          >
+            Отправить заявку
+          </button>
+
+          <p class="modal__success" id="modal-success">
+            Спасибо! Мы получили вашу заявку и скоро свяжемся с вами 🎉
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==================== ПОДВАЛ (FOOTER) ==================== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span>© 2026 Кофейня «Зерно». Учебный пример сайта.</span>
+        <span>Сделано с ☕ на HTML и CSS</span>
+      </div>
+    </footer>
+
+    <!-- Подключаем JS в самом конце body — так страница успевает
+       отрисоваться до того, как выполнится код -->
+    <script src="script.js"></script>
+  </body>
+</html>

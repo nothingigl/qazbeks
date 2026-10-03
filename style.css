@@ -1,0 +1,675 @@
+/* =====================================================
+   1. НАСТРОЙКИ И ПЕРЕМЕННЫЕ
+   Переменные (--что-то) удобны тем, что если захочешь
+   поменять, например, основной цвет — меняешь в одном месте,
+   а не ищешь по всему файлу.
+   ===================================================== */
+
+:root {
+  --color-bg: #FBF6EE;          /* тёплый фон страницы */
+  --color-dark: #2B1B12;        /* тёмный кофейный цвет (текст, шапка) */
+  --color-brown: #6B4423;       /* средний коричневый */
+  --color-accent: #C97B4A;      /* карамельный акцент (кнопки, ссылки) */
+  --color-card: #F1E4D2;        /* фон карточек */
+  --color-line: #E3D3BB;        /* тонкие линии-разделители */
+
+  --font-display: 'Playfair Display', serif; /* шрифт для заголовков */
+  --font-body: 'Nunito Sans', sans-serif;    /* шрифт для текста */
+
+  --radius: 14px;                /* скругление углов по умолчанию */
+  --container-width: 1100px;     /* максимальная ширина контента */
+}
+
+/* Сброс базовых отступов у браузера — стандартная практика */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding и border не увеличивают ширину блока */
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-dark);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Обёртка, которая центрирует контент и ограничивает его ширину.
+   Используем её почти в каждой секции. */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Общий вертикальный отступ для секций */
+.section {
+  padding: 96px 0;
+}
+
+
+/* =====================================================
+   2. ШАПКА САЙТА (HEADER)
+   ===================================================== */
+
+.header {
+  position: sticky;   /* шапка "прилипает" к верху при прокрутке */
+  top: 0;
+  z-index: 10;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.logo__icon {
+  font-size: 20px;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+  font-weight: 600;
+}
+
+.nav a {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Кнопка-бургер: три полоски. По умолчанию скрыта (см. пункт 9) */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  height: 2px;
+  background: var(--color-dark);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Когда меню открыто (JS добавляет класс burger--active),
+   рисуем крестик вместо трёх полосок */
+.burger--active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger--active span:nth-child(2) { opacity: 0; }
+.burger--active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Небольшая тень у шапки, когда страница прокручена вниз
+   (класс header--scrolled добавляет JS) */
+.header--scrolled {
+  box-shadow: 0 4px 16px rgba(43, 27, 18, 0.08);
+}
+
+
+/* =====================================================
+   3. КНОПКИ
+   Один класс .btn — базовый стиль, а модификаторы
+   (.btn--ghost, .btn--small) немного его меняют.
+   Это частый и удобный подход в CSS.
+   ===================================================== */
+
+.btn {
+  display: inline-block;
+  background: var(--color-dark);
+  color: #fff;
+  padding: 14px 26px;
+  border-radius: 999px; /* полностью круглые края = "капсула" */
+  font-weight: 700;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-dark);
+  border: 2px solid var(--color-dark);
+  padding: 12px 24px;
+}
+
+.btn--ghost:hover {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.btn--small {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   4. ГЕРОЙ-БЛОК (первый экран)
+   ===================================================== */
+
+.hero {
+  padding: 72px 0 40px;
+}
+
+.hero__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.hero__text {
+  max-width: 560px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 14px;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 64px); /* размер шрифта подстраивается под ширину экрана */
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+
+.hero__lead {
+  font-size: 18px;
+  color: var(--color-brown);
+  margin-bottom: 32px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* --- Декоративная чашка кофе, нарисованная только на CSS --- */
+
+.hero__cup {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+}
+
+.cup {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  width: 140px;
+  height: 110px;
+  background: var(--color-dark);
+  border-radius: 0 0 60px 60px;
+}
+
+.cup__handle {
+  position: absolute;
+  right: -34px;
+  top: 20px;
+  width: 40px;
+  height: 50px;
+  border: 12px solid var(--color-dark);
+  border-left: none;
+  border-radius: 0 30px 30px 0;
+}
+
+.saucer {
+  position: absolute;
+  bottom: 14px;
+  left: 10px;
+  width: 200px;
+  height: 22px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+/* Полоски "пара" над чашкой + анимация покачивания */
+.steam {
+  position: absolute;
+  bottom: 150px;
+  width: 10px;
+  height: 50px;
+  background: var(--color-line);
+  border-radius: 10px;
+  opacity: 0.8;
+  animation: steam-rise 3s ease-in-out infinite;
+}
+
+.steam--1 { left: 70px; animation-delay: 0s; }
+.steam--2 { left: 95px; animation-delay: 0.6s; }
+.steam--3 { left: 120px; animation-delay: 1.2s; }
+
+@keyframes steam-rise {
+  0%   { transform: translateY(0) scaleY(1);   opacity: 0.7; }
+  50%  { transform: translateY(-16px) scaleY(1.2); opacity: 0.3; }
+  100% { transform: translateY(0) scaleY(1);   opacity: 0.7; }
+}
+
+/* Уважаем пользователей, которые просят меньше анимации в системе */
+@media (prefers-reduced-motion: reduce) {
+  .steam {
+    animation: none;
+  }
+}
+
+
+/* =====================================================
+   5. СЕКЦИЯ "О НАС"
+   ===================================================== */
+
+.about {
+  background: var(--color-card);
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* три равные колонки */
+  gap: 32px;
+}
+
+.about__card {
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+.number {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 14px;
+}
+
+.about__card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.about__card p {
+  color: var(--color-brown);
+}
+
+
+/* =====================================================
+   6. СЕКЦИЯ "МЕНЮ"
+   ===================================================== */
+
+.section__title {
+  text-align: center;
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 48px;
+}
+
+.menu__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.menu__item {
+  padding: 26px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.menu__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.menu__row h4 {
+  font-size: 20px;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.menu__item p {
+  color: var(--color-brown);
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   7. ЧАСЫ РАБОТЫ И КОНТАКТЫ
+   ===================================================== */
+
+.hours {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.hours .eyebrow {
+  color: var(--color-accent);
+}
+
+.hours__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.hours__list li {
+  display: flex;
+  justify-content: space-between;
+  max-width: 320px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  font-weight: 600;
+}
+
+.contacts__line {
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.hours #contacts .btn {
+  margin-top: 16px;
+  background: var(--color-accent);
+}
+
+.hours #contacts .btn:hover {
+  background: #fff;
+  color: var(--color-dark);
+}
+
+
+/* =====================================================
+   8. ПОДВАЛ (FOOTER)
+   ===================================================== */
+
+.footer {
+  padding: 28px 0;
+  font-size: 14px;
+  color: var(--color-brown);
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+
+/* =====================================================
+   9. МОДАЛЬНОЕ ОКНО (форма бронирования)
+   ===================================================== */
+
+.modal {
+  position: fixed;
+  inset: 0; /* сокращение для top/right/bottom/left: 0 */
+  z-index: 100;
+  display: none; /* по умолчанию скрыто */
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Класс modal--open добавляет/убирает JS */
+.modal--open {
+  display: flex;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 27, 18, 0.55);
+}
+
+.modal__box {
+  position: relative;
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  padding: 40px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal__box h3 {
+  font-size: 26px;
+  margin-bottom: 24px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--color-card);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.field {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.field input,
+.field select {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  background: #fff;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+/* Красная обводка для поля, где JS нашёл ошибку валидации */
+.field input.invalid {
+  border-color: #C0392B;
+}
+
+.field__error {
+  display: block;
+  min-height: 18px;
+  color: #C0392B;
+  font-weight: 400;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.modal__success {
+  display: none; /* показываем через JS после успешной отправки */
+  margin-top: 16px;
+  text-align: center;
+  font-weight: 600;
+  color: #3E7B4F;
+}
+
+.modal__success--visible {
+  display: block;
+}
+
+
+/* =====================================================
+   10. ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ ПРОКРУТКЕ (reveal on scroll)
+   JS добавляет класс .reveal--visible, когда элемент
+   появляется в зоне видимости — см. script.js
+   ===================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* =====================================================
+   11. АДАПТИВНОСТЬ (МЕДИА-ЗАПРОСЫ)
+   Ниже мы "перестраиваем" сайт под меньшие экраны:
+   сначала планшеты, потом телефоны.
+   ===================================================== */
+
+@media (max-width: 900px) {
+  .burger {
+    display: flex; /* показываем бургер только на маленьких экранах */
+  }
+
+  #open-booking {
+    display: none; /* прячем кнопку "Забронировать", чтобы не было тесно */
+  }
+
+  /* Меню теперь не "display: none", а прячем через прозрачность и высоту,
+     чтобы можно было плавно анимировать открытие через JS-класс */
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav a {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* Класс nav--open добавляет JS при клике на бургер */
+  .nav--open {
+    max-height: 300px;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .about__inner,
+  .menu__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hours__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .about__inner,
+  .menu__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
